@@ -1,11 +1,15 @@
 package com.sahansha.accounts.controller;
 
+import com.sahansha.accounts.Exception.GlobalExceptionHandler;
 import com.sahansha.accounts.constants.AccountsConstants;
 import com.sahansha.accounts.dto.CustomerDTO;
+import com.sahansha.accounts.dto.ErrorResponseDTO;
 import com.sahansha.accounts.dto.ResponseDTO;
 import com.sahansha.accounts.service.IAccountsService;
 import com.sahansha.accounts.service.impl.AccountsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -73,7 +77,13 @@ public class AccountController {
                     description = AccountsConstants.MESSAGE_200
             ),@ApiResponse(
                     responseCode = "500",
-                    description = AccountsConstants.MESSAGE_500
+                    description =  "Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            ),@ApiResponse(
+                    responseCode = "417",
+                    description =  AccountsConstants.MESSAGE_417_UPDATE
             )
             }
     )
@@ -87,7 +97,7 @@ public class AccountController {
         }
         else{
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(AccountsConstants.STATUS_500,AccountsConstants.MESSAGE_500));
+                    .body(new ResponseDTO(AccountsConstants.STATUS_417,AccountsConstants.MESSAGE_417_UPDATE));
         }
 
     }
@@ -103,7 +113,13 @@ public class AccountController {
                     description = AccountsConstants.MESSAGE_200
             ),@ApiResponse(
                     responseCode = "500",
-                    description = AccountsConstants.MESSAGE_500
+                    description = "Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            ),@ApiResponse(
+                    responseCode = "417",
+                    description =  AccountsConstants.MESSAGE_417_DELETE
             )
             }
     )
@@ -119,7 +135,7 @@ public class AccountController {
         }
         else{
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(AccountsConstants.STATUS_500,AccountsConstants.MESSAGE_500));
+                    .body(new ResponseDTO(AccountsConstants.STATUS_417,AccountsConstants.MESSAGE_417_DELETE));
         }
     }
 
