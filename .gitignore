@@ -1,0 +1,4 @@
+.idea
+/accounts/.gitignore
+/accounts/.mvn
+/accounts/target
