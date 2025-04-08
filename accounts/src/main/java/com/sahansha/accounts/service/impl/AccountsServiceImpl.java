@@ -57,8 +57,8 @@ public class AccountsServiceImpl implements IAccountsService {
         accounts.setAccountNumber(randomNumber);
         accounts.setAccountType(AccountsConstants.SAVINGS);
         accounts.setBranchAddress(AccountsConstants.ADDRESS);
-        accounts.setCreatedBy("Anonymous");
-        accounts.setCreatedAt(LocalDateTime.now());
+//        accounts.setCreatedBy("Anonymous");
+//        accounts.setCreatedAt(LocalDateTime.now());
         return accounts;
 
     }
@@ -98,15 +98,12 @@ public class AccountsServiceImpl implements IAccountsService {
                                 () -> new ResourceNotFoundException("Account","accountNumber",accountsDTO.getAccountNumber().toString())
                         );
                 AccountsMapper.mapToAccounts(accountsDTO,accounts);
-                accounts.setUpdatedAt(LocalDateTime.now());
-                accounts.setUpdatedBy("Anonymous");
+
                 accountsRepository.save(accounts);
                 Customer customer=customerRepository.findById(accounts.getCustomerId()).orElseThrow(
                         () -> new ResourceNotFoundException("Customer",
                                 "customerId",accounts.getCustomerId().toString()));
                 CustomerMapper.mapToCustomer(customerDTO,customer);
-                customer.setUpdatedAt(LocalDateTime.now());
-                customer.setUpdatedBy("Anonymous");
                 customerRepository.save(customer);
                 isUpdated=true;
             }
