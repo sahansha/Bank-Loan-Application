@@ -18,14 +18,12 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.H2Dialect
+  config:
+    import: "optional:configserver:http://localhost:8071/"
 
   profiles:
     active:
     - prod
-#  config:
-#    import:
-#      - "application-prod.yml"
-#      - "application-qa.yml"
 
 
 build:

@@ -1,0 +1,71 @@
+[33mcommit 6acd332eb412a6026970331d91c46110ceb72bc2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature[m[33m, [m[1;32mfeature[m[33m)[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Sat Apr 12 13:16:36 2025 +0300
+
+    Added spring boot configuration by using profiles
+
+[33mcommit 37ba4a758866c56ec119adfaf8848cf5adf96f60[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Thu Apr 10 01:32:07 2025 +0300
+
+    Updates in OpenAPI specification documentation
+
+[33mcommit cea3b2ba2d184b4fae418151f580d2000669075f[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Thu Apr 10 01:25:02 2025 +0300
+
+    Added Cards Microservice for Bank Loan Application
+
+[33mcommit 77b3c121540aeb9881ad64d54ab61a3ea567e37c[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Thu Apr 10 01:13:49 2025 +0300
+
+    Updates in Global exception handler for adding validation exception handler
+
+[33mcommit 124c99d0034371cadc32dd9dcd79a92c57f632df[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Thu Apr 10 00:48:30 2025 +0300
+
+    Added Loan Microservices with CRUD operations in Loans API
+
+[33mcommit 5941dfe0798a3b7b9deee1fc1a1bfba4e4a2231c[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Wed Apr 9 01:02:31 2025 +0300
+
+    Added custom OpenAPI documentation for dto's and their respective fields
+
+[33mcommit 26f147b4498dbec0885fbad0ecaea746724ff4b1[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Wed Apr 9 00:30:37 2025 +0300
+
+    Added custom OpenAPI documentation for controller and endpoints
+
+[33mcommit cca329fce61b046fc4ca5a27d93c721ce1feda71[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Wed Apr 9 00:03:31 2025 +0300
+
+    Added custom OpenAPI Definition for Accounts Microservices
+
+[33mcommit fcf6cdee129a2d39999d56231daaecee2fad015d[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Tue Apr 8 23:39:01 2025 +0300
+
+    Added Open API Specification for documenting Rest API
+
+[33mcommit cb55bb424812fc876631a55c329fa3ad01e0db28[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Tue Apr 8 23:20:20 2025 +0300
+
+    Added auto auditing data  using spring data jpa
+
+[33mcommit 929def00e83e91f9ba3e94a9fd7f4bb9ec002263[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Tue Apr 8 23:09:38 2025 +0300
+
+    Addition of Accounts API
+
+[33mcommit 52d16aeaadd3e263b4d429eec83852645d00dcb7[m
+Author: Sahansha Khan <sahanshakhan66@gmail.com>
+Date:   Mon Apr 7 00:29:59 2025 +0300
+
+    Initialized new service
