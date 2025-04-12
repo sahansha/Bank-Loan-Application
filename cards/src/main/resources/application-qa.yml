@@ -1,0 +1,11 @@
+build:
+  version: 2.0
+
+cards:
+  message: "Welcome to BankLoan cards related QA APIs "
+  contactDetails:
+    name: "George - QA Lead"
+    email: "george@gmail.com"
+  onCallSupport:
+    - (666) 555-1234
+    - (666) 523-1345

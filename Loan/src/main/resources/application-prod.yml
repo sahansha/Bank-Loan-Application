@@ -1,0 +1,11 @@
+build:
+  version: 1.0
+
+loans:
+  message: "Welcome to BankLoan cards related prod APIs "
+  contactDetails:
+    name: "Sahansha Khan - Product Owner"
+    email: "sahansha@gmail.com"
+  onCallSupport:
+    - (777) 555-2312
+    - (777) 523-4321

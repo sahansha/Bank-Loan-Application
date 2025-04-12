@@ -20,8 +20,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 
   profiles:
-    active:
-    - prod
+    active: prod
 #  config:
 #    import:
 #      - "application-prod.yml"

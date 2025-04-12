@@ -2,6 +2,7 @@ package com.sahansha.accounts.controller;
 
 import com.sahansha.accounts.Exception.GlobalExceptionHandler;
 import com.sahansha.accounts.constants.AccountsConstants;
+import com.sahansha.accounts.dto.AccountsContactInfoDTO;
 import com.sahansha.accounts.dto.CustomerDTO;
 import com.sahansha.accounts.dto.ErrorResponseDTO;
 import com.sahansha.accounts.dto.ResponseDTO;
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/api/v1/accounts",produces = "application/json")
-@AllArgsConstructor
+
 @Validated
 @Tag(
         name = "CRUD Accounts API",
@@ -32,6 +34,13 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     private final IAccountsService iAccountsService;
+
+    public AccountController(IAccountsService iAccountsService) {
+        this.iAccountsService = iAccountsService;
+    }
+
+    @Autowired
+    public AccountsContactInfoDTO accountsContactInfoDto;
 
     @Operation(
             method = "Create Account",
@@ -137,6 +146,57 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDTO(AccountsConstants.STATUS_417,AccountsConstants.MESSAGE_417_DELETE));
         }
+    }
+
+//    @Operation(
+//            summary = "Get Build information",
+//            description = "Get Build information that is deployed into accounts microservice"
+//    )
+//    @ApiResponses({
+//            @ApiResponse(
+//                    responseCode = "200",
+//                    description = "HTTP Status OK"
+//            ),
+//            @ApiResponse(
+//                    responseCode = "500",
+//                    description = "HTTP Status Internal Server Error",
+//                    content = @Content(
+//                            schema = @Schema(implementation = ErrorResponseDTO.class)
+//                    )
+//            )
+//    }
+//    )
+//    @GetMapping("/build-info")
+//    public ResponseEntity<String> getBuildInfo() {
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body();
+//    }
+
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDTO> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
     }
 
 }

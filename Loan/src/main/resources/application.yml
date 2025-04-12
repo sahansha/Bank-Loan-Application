@@ -13,6 +13,21 @@ spring:
     hibernate:
       ddl-auto: update
       show-sql: true
+  profiles:
+    active:
+    - prod
 
 Server:
   port: 8090
+
+build:
+  version: 3.0
+
+loans:
+  message: "Welcome to BankLoan cards related local APIs "
+  contactDetails:
+    name: "John Doe - Developer"
+    email: "john@gmail.com"
+  onCallSupport:
+    - (555) 555-2312
+    - (555) 523-4321

@@ -1,0 +1,11 @@
+build:
+  version: 1.0
+
+accounts:
+  message: "Welcome to BankLoan accounts related prod APIs "
+  contactDetails:
+    name: "Jacky - Product Owner"
+    email: "jacky@gmail.com"
+  onCallSupport:
+    - (777) 555-1234
+    - (777) 523-1345
