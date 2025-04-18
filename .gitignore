@@ -2,3 +2,8 @@
 /accounts/.gitignore
 /accounts/.mvn
 /accounts/target
+/cards/target
+/Loans/target
+/ConfigServer/target
+/Test
+/docker-compose

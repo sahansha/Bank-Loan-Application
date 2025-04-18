@@ -2,6 +2,7 @@ package com.sahansha.accounts.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor

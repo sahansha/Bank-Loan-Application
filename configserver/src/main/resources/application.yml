@@ -23,6 +23,26 @@ spring:
           defaultLabel: main
           cloneOnStart: true
           force-pull: true
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
 
 encrypt:
-  key: ${ENCRYPT_KEY}
+  key: "FD17UY18GH90BS821NBPL564"
