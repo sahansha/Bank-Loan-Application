@@ -14,7 +14,9 @@ import com.sahansha.accounts.repository.CustomerRepository;
 import com.sahansha.accounts.service.ICustomerService;
 import com.sahansha.accounts.service.client.CardsClient;
 import com.sahansha.accounts.service.client.LoansClient;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,10 +41,15 @@ public class CustomerServiceImpl implements ICustomerService {
                     );
             CustomerDetailsDTO customerDetailsDto = CustomerMapper.mapToCustomerDetailsDto(customer, new CustomerDetailsDTO());
             customerDetailsDto.setAccountsDTO(AccountsMapper.mapToAccountsDto(accounts, new AccountsDTO()));
-            LoanDTO loanDTO = loansClient.fetchLoan(mobileNumber).getBody();
-            CardsDto cardsDto = cardsClient.fetchCardDetails(mobileNumber).getBody();
-            customerDetailsDto.setLoansDTO(loanDTO);
-            customerDetailsDto.setCardsDto(cardsDto);
+            ResponseEntity<LoanDTO> loanDTO = loansClient.fetchLoan(mobileNumber);
+            ResponseEntity<CardsDto> cardsDto = cardsClient.fetchCardDetails(mobileNumber);
+            if(loanDTO!=null)
+            {
+                customerDetailsDto.setLoansDTO(loanDTO.getBody());
+            }
+            if (cardsDto != null) {
+                customerDetailsDto.setCardsDto(cardsDto.getBody());
+            }
             return customerDetailsDto;
         } catch (RuntimeException e) {
             throw new RuntimeException(e);

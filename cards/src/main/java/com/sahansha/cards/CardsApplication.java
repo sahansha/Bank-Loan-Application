@@ -12,9 +12,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-/*@ComponentScans({ @ComponentScan("com.eazybytes.cards.controller") })
-@EnableJpaRepositories("com.eazybytes.cards.repository")
-@EntityScan("com.eazybytes.cards.model")*/
+/*@ComponentScans({ @ComponentScan("com.sahansha.cards.controller") })
+@EnableJpaRepositories("com.sahansha.cards.repository")
+@EntityScan("com.sahansha.cards.model")*/
 @EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 @EnableConfigurationProperties(CardsContactInfoDTO.class)
 @OpenAPIDefinition(
