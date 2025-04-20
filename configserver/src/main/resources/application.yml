@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: configserver
+    name: "configserver"
   profiles:
     #active: native
     active: git
@@ -43,6 +43,25 @@ management:
     health:
       probes:
         enabled: true
+    shutdown:
+      access: unrestricted
+#  info:
+#    env:
+#      enabled: true
+
+info:
+  app:
+    name: "BankLoan Config Server"
+    description: "BankLoan Config Server"
+    version: "1.0.0"
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8070/eureka
 
 encrypt:
   key: "FD17UY18GH90BS821NBPL564"

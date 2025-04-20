@@ -1,0 +1,57 @@
+server:
+  port: 8072
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Bank Loan Gateway Server Application"
+    version: "1.0.0"
+
+logging:
+  level:
+    com:
+      sahansha:
+        gatewayserver: DEBUG
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka"
+
+resilience4j.circuitbreaker:
+  config:
+    default:
+      timeoutDuration: 5s
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 50
+      permittedNumberOfCallsInHalfOpenState: 3
+      slowCallDurationThreshold: 10s
+      slidingWindowSize: 10
+      waitDuration: 5s

@@ -56,7 +56,9 @@ public class LoansController {
     }
     )
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createLoan(@RequestParam String mobileNumber)
+    public ResponseEntity<ResponseDTO> createLoan(@RequestParam
+                                                      @Pattern(regexp = "(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                      String mobileNumber)
     {
         loanService.createLoan(mobileNumber);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -86,7 +88,9 @@ public class LoansController {
             }
     )
     @GetMapping("/fetch")
-    public ResponseEntity<LoanDTO> fetchLoan(@RequestParam String mobileNumber)
+    public ResponseEntity<LoanDTO> fetchLoan(@RequestParam
+                                                 @Pattern(regexp = "(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                 String mobileNumber)
     {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(loanService.fetchLoan(mobileNumber));
