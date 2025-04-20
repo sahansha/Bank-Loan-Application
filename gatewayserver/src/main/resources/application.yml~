@@ -46,7 +46,7 @@ eureka:
       defaultZone: "http://localhost:8070/eureka"
 
 resilience4j.circuitbreaker:
-  configs:
+  config:
     default:
       timeoutDuration: 5s
       waitDurationInOpenState: 10s

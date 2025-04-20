@@ -15,6 +15,21 @@ spring:
       ddl-auto: update
   config:
     import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      timeoutDuration: 5s
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 50
+      permittedNumberOfCallsInHalfOpenState: 3
+      slowCallDurationThreshold: 10s
+      slidingWindowSize: 10
+      waitDuration: 5s
 
 #  rabbitmq:
 #    host: "localhost"
@@ -39,6 +54,7 @@ info:
     name: "accounts"
     description: "BankLoan accounts related local APIs "
     version: "1.0.0"
+
 
 eureka:
   instance:
