@@ -8,6 +8,8 @@ import com.sahansha.accounts.dto.ErrorResponseDTO;
 import com.sahansha.accounts.dto.ResponseDTO;
 import com.sahansha.accounts.service.IAccountsService;
 import com.sahansha.accounts.service.impl.AccountsServiceImpl;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,6 +20,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +37,9 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     private final IAccountsService iAccountsService;
+
+    @Value("${build.info}")
+    public String buildInfo;
 
     public AccountController(IAccountsService iAccountsService) {
         this.iAccountsService = iAccountsService;
@@ -148,31 +154,37 @@ public class AccountController {
         }
     }
 
-//    @Operation(
-//            summary = "Get Build information",
-//            description = "Get Build information that is deployed into accounts microservice"
-//    )
-//    @ApiResponses({
-//            @ApiResponse(
-//                    responseCode = "200",
-//                    description = "HTTP Status OK"
-//            ),
-//            @ApiResponse(
-//                    responseCode = "500",
-//                    description = "HTTP Status Internal Server Error",
-//                    content = @Content(
-//                            schema = @Schema(implementation = ErrorResponseDTO.class)
-//                    )
-//            )
-//    }
-//    )
-//    @GetMapping("/build-info")
-//    public ResponseEntity<String> getBuildInfo() {
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body();
-//    }
+    @Operation(
+            summary = "Get Build information",
+            description = "Get Build information that is deployed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    }
+    )
+    @Retry(name = "buildInfoRetry", fallbackMethod = "getBuildInfoFallback")
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildInfo);
+    }
 
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("0.9");
+    }
 
     @Operation(
             summary = "Get Contact Info",
@@ -192,11 +204,18 @@ public class AccountController {
             )
     }
     )
+    @RateLimiter(name = "contactInfoRateLimiter", fallbackMethod = "getContactInfoFallback")
     @GetMapping("/contact-info")
     public ResponseEntity<AccountsContactInfoDTO> getContactInfo() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(accountsContactInfoDto);
+    }
+
+    public ResponseEntity<AccountsContactInfoDTO> getContactInfoFallback(Throwable throwable) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(null);
     }
 
 }
