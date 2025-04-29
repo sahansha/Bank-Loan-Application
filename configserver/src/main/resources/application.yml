@@ -48,6 +48,9 @@ management:
 #  info:
 #    env:
 #      enabled: true
+    metrics:
+      tags:
+        application: ${spring.application.name}
 
 info:
   app:
@@ -65,3 +68,11 @@ info:
 
 encrypt:
   key: "FD17UY18GH90BS821NBPL564"
+
+logging:
+  level:
+    com:
+      sahansha:
+        accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

@@ -11,6 +11,12 @@ spring:
         locator:
           enabled: false
           lowerCaseServiceId: true
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
 
 management:
   endpoints:
@@ -23,6 +29,9 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
@@ -46,7 +55,7 @@ eureka:
       defaultZone: "http://localhost:8070/eureka"
 
 resilience4j.circuitbreaker:
-  config:
+  configs:
     default:
       timeoutDuration: 5s
       waitDurationInOpenState: 10s

@@ -11,6 +11,12 @@ spring:
         locator:
           enabled: false
           lowerCaseServiceId: true
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
 
 management:
   endpoints:
@@ -23,6 +29,9 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
@@ -35,6 +44,8 @@ logging:
     com:
       sahansha:
         gatewayserver: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 eureka:
   instance:
@@ -55,3 +66,4 @@ resilience4j.circuitbreaker:
       slowCallDurationThreshold: 10s
       slidingWindowSize: 10
       waitDuration: 5s
+

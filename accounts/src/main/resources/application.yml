@@ -31,11 +31,39 @@ resilience4j.circuitbreaker:
       slidingWindowSize: 10
       waitDuration: 5s
 
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 500
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+#      ignoreExceptions:
+#        - java.lang.NullPointerException
+      retryExceptions:
+        - java.util.concurrent.TimeoutException
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeoutDuration: 1000
+      limitRefreshPeriod: 5000
+      limitForPeriod: 1
+
+
 #  rabbitmq:
 #    host: "localhost"
 #    port: 5672
 #    username: "guest"
 #    password: "guest"
+logging:
+  level:
+    com:
+      sahansha:
+        accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
 
 management:
   endpoints:
@@ -48,12 +76,16 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
     name: "accounts"
     description: "BankLoan accounts related local APIs "
     version: "1.0.0"
+
 
 
 eureka:
