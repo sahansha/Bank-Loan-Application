@@ -44,8 +44,6 @@ logging:
     com:
       sahansha:
         gatewayserver: DEBUG
-  pattern:
-    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 eureka:
   instance:
@@ -66,4 +64,3 @@ resilience4j.circuitbreaker:
       slowCallDurationThreshold: 10s
       slidingWindowSize: 10
       waitDuration: 5s
-

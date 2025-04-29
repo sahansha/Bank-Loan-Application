@@ -56,6 +56,14 @@ resilience4j.ratelimiter:
 #    port: 5672
 #    username: "guest"
 #    password: "guest"
+logging:
+  level:
+    com:
+      sahansha:
+        accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
 
 management:
   endpoints:
@@ -68,12 +76,16 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
     name: "accounts"
     description: "BankLoan accounts related local APIs "
     version: "1.0.0"
+
 
 
 eureka:

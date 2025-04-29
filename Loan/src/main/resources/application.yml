@@ -32,6 +32,9 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
@@ -62,3 +65,11 @@ loans:
   onCallSupport:
     - (555) 555-2312
     - (555) 523-4321
+
+logging:
+  level:
+    com:
+      sahansha:
+        accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
